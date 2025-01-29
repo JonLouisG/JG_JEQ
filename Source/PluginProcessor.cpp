@@ -410,7 +410,7 @@ void JG_JEQAudioProcessor::setStateInformation (const void* data, int sizeInByte
     
 }
 
-ChainSettings getChainSetting(juce::AudioProcessorValueTreeState& apvts)
+ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
 {
     ChainSettings settings;
     
@@ -419,8 +419,8 @@ ChainSettings getChainSetting(juce::AudioProcessorValueTreeState& apvts)
     settings.peakFreq = apvts.getRawParameterValue("Peak Freq")->load();
     settings.peakGainInDecibels = apvts.getRawParameterValue("Peak Gain")->load();
     settings.peakQuality = apvts.getRawParameterValue("Peak Quality")->load();
-    settings.lowCutSlope = apvts.getRawParameterValue("LowCut Slope")->load();
-    settings.highCutSlope = apvts.getRawParameterValue("HighCut Slope")->load();
+    settings.lowCutSlope = static_cast<Slope>(apvts.getRawParameterValue("LowCut Slope")->load());
+    settings.highCutSlope = static_cast<Slope>(apvts.getRawParameterValue("HighCut Slope")->load());
     
     return settings;
 }
